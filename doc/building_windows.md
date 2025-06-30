@@ -1,82 +1,74 @@
-# Build instructions for Windows
+# Bauanleitung für Windows 64
 
-This page describes all necessary steps to build the Firestorm viewer for Windows. For building instructions up to (and including) release 6.5.3, see the archived version for [building with Python 2.7](https://wiki.firestormviewer.org/archive:fs_compiling_firestorm_windows_py_27).
+## Installation der erforderlichen Entwicklungswerkzeuge
 
-> [!WARNING]
-> Please note that we do not give support for compiling the viewer on your own. However, there is a self-compilers group in Second Life that can be joined to ask questions related to compiling the viewer: [Firestorm Self Compilers](https://tinyurl.com/firestorm-self-compilers)
+Dies wird für das Kompilieren jedes Viewers benötigt, der auf dem Linden Lab Open-Source-Code basiert, und muss nur einmal durchgeführt werden.
 
-> [!IMPORTANT]
-> With the [merge of Linden Lab release 6.6.16](https://github.com/FirestormViewer/phoenix-firestorm/commit/b64793e2b0d14e44274335c874660af9f679f7f8) it is **NOT** possible to create 32bit builds anymore! Only 64bit builds are possible going forward!
-
-## Install required development tools
-
-This is needed for compiling any viewer based on the Linden Lab open source code and only needs to be done once.
-
-All installations are done with default settings (unless told explicitly) - if you change that, you're on your own!
+Alle Installationen werden mit Standardeinstellungen durchgeführt (sofern nicht anders angegeben) – wenn du diese änderst, bist du auf dich allein gestellt!
 
 ### Windows
 
-- Install Windows 10/11 64bit using your own product key
+- Installiere Windows 10/11 64-Bit mit deinem eigenen Produktschlüssel
 
 ### Microsoft Visual Studio 2022
 
-- Install Visual Studio 2022
-  - Run the installer as Administrator (right click, "Run as administrator")
-  - Check "Desktop development with C++" on the "Workloads" tab.
-  - All other workload options can be unchecked
+- Installiere Visual Studio 2022
+  - Führe das Installationsprogramm als Administrator aus (Rechtsklick, "Als Administrator ausführen")
+  - Aktiviere "Desktopentwicklung mit C++" im Reiter "Workloads".
+  - Alle anderen Workload-Optionen können deaktiviert bleiben
 
 > [!TIP]
-> If you don't own a copy of a commercial edition of Visual Studio 2022 (e.g. Professional), you might consider installing the [Community version](https://visualstudio.microsoft.com/free-developer-offers)
+> Falls du keine kommerzielle Version von Visual Studio 2022 (z.B. Professional) besitzt, kannst du die [Community-Version](https://visualstudio.microsoft.com/free-developer-offers) installieren.
 
 ### Tortoise Git
 
--  Download and install [TortoiseGit 2.9.0 or newer](https://tortoisegit.org) (64bit)
-  - Note: No option available to install as Administrator
-  - Use default options (path, components etc.) for Tortoise Git itself
-  - At some point, it will ask you to download and install Git for Windows
-    - You can install with default options **EXCEPT** when it asks for "Configuring the line endings conversion": You **MUST** select "Checkout as-is, commit as-is" here!
+- Lade [TortoiseGit 2.9.0 oder neuer](https://tortoisegit.org) (64-Bit) herunter und installiere es
+  - Hinweis: Es gibt keine Option, es als Administrator zu installieren
+  - Verwende die Standardoptionen (Pfad, Komponenten etc.) für Tortoise Git selbst
+  - An einem bestimmten Punkt wird es dich auffordern, Git für Windows herunterzuladen und zu installieren
+    - Hier kannst du die Standardoptionen verwenden, **AUSSER** wenn es nach der "Konfiguration der Zeilenenden-Umwandlung" fragt: Hier **MUSST** du "Checkout as-is, commit as-is" auswählen!
 
 ### CMake
 
-- Download and install at least [CMake 3.16.0](http://www.cmake.org/download)
-  - Note: No option available to install as Administrator
-  - At the "Install options" screen, select "Add CMake to the system PATH for all users"
-  - For everything else, use the default options (path, etc.)
-  - Make sure that the following directory was added to your path:
-    For the 32bit version:
+- Lade mindestens [CMake 3.16.0](http://www.cmake.org/download) herunter und installiere es
+  - Hinweis: Es gibt keine Option, es als Administrator zu installieren
+  - Wähle im Bildschirm "Installationsoptionen" die Option "Add CMake to the system PATH for all users"
+  - Für alles andere verwende die Standardoptionen (Pfad etc.)
+  - Stelle sicher, dass folgendes Verzeichnis zu deinem Pfad hinzugefügt wurde:
+    Für die 32-Bit-Version:
     `C:\Program Files (x86)\CMake\bin`
-    For the 64bit version:
+    Für die 64-Bit-Version:
     `C:\Program Files\CMake\bin`
 
 ### Cygwin
 
-- Download and install [Cygwin 64](http://cygwin.com/install.html) (64bit)
-  - Run the installer as Administrator (right click, "Run as administrator")
-  - Use default options (path, components etc.) *until* you get to the "Select Packages" screen
-  - Add additional packages:
+- Lade [Cygwin 64](http://cygwin.com/install.html) (64-Bit) herunter und installiere es
+  - Führe das Installationsprogramm als Administrator aus (Rechtsklick, "Als Administrator ausführen")
+  - Verwende Standardoptionen (Pfad, Komponenten etc.), **bis** du zum Bildschirm "Pakete auswählen" kommst
+  - Füge zusätzliche Pakete hinzu:
     - Devel/patch
-  - Use default options for everything else
-  - Make sure that the following directory was added to your path and that it is placed before "%SystemRoot%\system32":
+  - Verwende Standardoptionen für alles andere
+  - Stelle sicher, dass folgendes Verzeichnis zu deinem Pfad hinzugefügt wurde und dass es vor `%SystemRoot%\system32` steht:
     `C:\Cygwin64\bin`
 
 ### Python
 
-- Download and install the most recent version of [Python 3](https://www.python.org/downloads/windows)
-  - Run the installer as Administrator (right click, “Run as administrator”)
-  - Tick "Add Python 3.10 to PATH"
-  - Choose the "Customize Installation" option.
-    - Make sure that "pip" is ticked.
-    - "Documentation", "tcl/tk and IDLE", "Python test suite" and "py launcher" are not needed to compile the viewer but can be selected if you wish.
-    - On the next screen, the correct options should already be ticked.
-    - Set custom install location to: `C:\Python3`
-  - Make sure that the following directory was added to your path: `C:\Python3`
+- Lade die neueste Version von [Python 3](https://www.python.org/downloads/windows) herunter und installiere sie
+  - Führe das Installationsprogramm als Administrator aus (Rechtsklick, "Als Administrator ausführen")
+  - Aktiviere "Add Python 3.10 to PATH"
+  - Wähle die Option "Benutzerdefinierte Installation".
+    - Stelle sicher, dass "pip" aktiviert ist.
+    - "Dokumentation", "tcl/tk und IDLE", "Python-Testsuite" und "py launcher" werden nicht zum Kompilieren des Viewers benötigt, können aber ausgewählt werden, falls gewünscht.
+    - Im nächsten Bildschirm sollten bereits die korrekten Optionen aktiviert sein.
+    - Setze den benutzerdefinierten Installationspfad auf: `C:\Python3`
+  - Stelle sicher, dass folgendes Verzeichnis zu deinem Pfad hinzugefügt wurde: `C:\Python3`
 
 > [!TIP]
-> On Windows 10/11, you also might want to disable the app alias for Python. Open the Windows settings app, search for "Manage app execution aliases" and disable the alias for "python3.exe"
+> Unter Windows 10/11 solltest du möglicherweise auch den App-Alias für Python deaktivieren. Öffne die Windows-Einstellungen, suche nach "App-Ausführungsaliase verwalten" und deaktiviere den Alias für "python3.exe".
 
-### Intermediate check
+### Zwischenprüfung
 
-Confirm things are installed properly so far by opening a Cygwin terminal and enter:
+Überprüfe, ob alles korrekt installiert wurde, indem du ein Cygwin-Terminal öffnest und folgende Befehle eingibst:
 
 ```
 cmake --version
@@ -85,48 +77,49 @@ python --version
 pip --version
 ```
 
-If they all report sensible values and not "Command not found" errors, then you are in good shape.
+Wenn alle sinnvolle Werte anzeigen und keine "Command not found"-Fehler auftreten, bist du auf dem richtigen Weg.
 
 > [!NOTE]
-> The Cygwin terminal is only needed for testing. All commands for actually building the viewer will be run from the Windows command shell.
+> Das Cygwin-Terminal wird nur für Tests benötigt. Alle Befehle zum eigentlichen Bau des Viewers werden in der Windows-Eingabeaufforderung ausgeführt.
 
-### Set up Autobuild
+### Autobuild einrichten
 
-- Install Autobuild
-   You can install autobuild and its dependencies using the `requirements.txt` file that is part of the repo, this will build using the same versions that our official builds use.
-  - Open Windows Command Prompt and enter: <code>pip install -r requirements.txt</code>
-  - Autobuild will be installed. **Earlier versions of Autobuild could be made to work by just putting the source files into your path correctly; this is no longer true - Autobuild _must_ be installed as described here.**
-  - Open Windows Command Prompt and enter:
+- Installiere Autobuild
+  Du kannst Autobuild und seine Abhängigkeiten mit der `requirements.txt`-Datei installieren, die Teil des Repositories ist. Dadurch wird mit denselben Versionen gebaut, die auch für die offiziellen Builds verwendet werden.
+  - Öffne die Windows-Eingabeaufforderung und gib ein:  
+    `pip install -r requirements.txt`
+  - Autobuild wird installiert. **Ältere Versionen von Autobuild konnten durch einfaches Einfügen der Quelldateien in den Pfad zum Laufen gebracht werden; das ist nicht mehr der Fall – Autobuild _muss_ wie hier beschrieben installiert werden.**
+  - Öffne die Windows-Eingabeaufforderung und gib ein:  
     `pip install git+https://github.com/secondlife/autobuild.git#egg=autobuild`
-- Set environment variable AUTOBUILD_VSVER to 170 (170 = Visual Studio 2022).
-- Check Autobuild version to be "autobuild 3.8" or higher:
+- Setze die Umgebungsvariable AUTOBUILD_VSVER auf 170 (170 = Visual Studio 2022).
+- Überprüfe die Autobuild-Version auf "autobuild 3.8" oder höher:  
   `autobuild --version`
 
 ### NSIS
 
-- If you plan to package the viewer and create an installer file, you must install the NSIS from the [official website](https://nsis.sourceforge.io).
-- Not required unless you need to build an actual viewer installer for distribution, or change the NSIS installer package logic itself
-  
+- Falls du den Viewer packen und eine Installationsdatei erstellen möchtest, musst du NSIS von der [offiziellen Website](https://nsis.sourceforge.io) installieren.
+- Nicht erforderlich, es sei denn, du möchtest einen tatsächlichen Viewer-Installer für die Verteilung erstellen oder die NSIS-Installer-Logik selbst ändern.
+
 > [!IMPORTANT]
-> If you want to package the viewer built on a revision prior to the [Bugsplat merge](https://github.com/FirestormViewer/phoenix-firestorm/commit/a399c6778579ac7c8965737088c275dde1371c9e), you must install the Unicode version of NSIS [from here](http://www.scratchpaper.com) - the installer from the NSIS website **WILL NOT** work!
+> Falls du den Viewer auf einer Revision vor dem [Bugsplat-Merge](https://github.com/FirestormViewer/phoenix-firestorm/commit/a399c6778579ac7c8965737088c275dde1371c9e) packen möchtest, musst du die Unicode-Version von NSIS [von hier](http://www.scratchpaper.com) installieren – der Installer von der NSIS-Website wird **NICHT** funktionieren!
 
-## Setup viewer build variables
+## Viewer-Build-Variablen einrichten
 
-In order to make it easier to build collections of related packages (such as the viewer and all the library packages that it imports) with the same compilation options, Autobuild expects a file of variable definitions. This can be set using the environmenat variable AUTOBUILD_VARIABLES_FILE.
+Um das Bauen von zusammengehörigen Paketen (wie dem Viewer und allen Bibliotheken, die er importiert) mit denselben Kompilierungsoptionen zu vereinfachen, erwartet Autobuild eine Datei mit Variablendefinitionen. Diese kann über die Umgebungsvariable AUTOBUILD_VARIABLES_FILE festgelegt werden.
 
-- Clone the build variables repository: 
-  `git clone https://github.com/FirestormViewer/fs-build-variables.git <path-to-your-variables-file>`
-- Set the environment variable AUTOBUILD_VARIABLES_FILE to
-  `<path-to-your-variables-file>\variables`
+- Klone das Build-Variablen-Repository:  
+  `git clone https://github.com/FirestormViewer/fs-build-variables.git <Pfad-zur-Variablendatei>`
+- Setze die Umgebungsvariable AUTOBUILD_VARIABLES_FILE auf  
+  `<Pfad-zur-Variablendatei>\variables`
 
-## Configure Visual Studio 2022 (optional)
+## Visual Studio 2022 konfigurieren (optional)
 
-- Start the IDE
-- Navigate to **Tools** > **Options** > **Projects and Solutions** > **Build and Run** and set **maximum number of parallel projects builds** to **1**.
+- Starte die IDE
+- Navigiere zu **Tools** > **Options** > **Projects and Solutions** > **Build and Run** und setze **maximum number of parallel projects builds** auf **1**.
 
-## Set up your source code tree
+## Quellcode-Verzeichnis einrichten
 
-Plan your directory structure ahead of time. If you are going to be producing changes or patches you will be cloning a copy of an unaltered source code tree for every change or patch you make, so you might want to have all this work stored in its own directory. If you are a casual compiler and won't be producing any changes, you can use one directory. For this document, it is assumed that you created a folder c:\firestorm.
+Plane deine Verzeichnisstruktur im Voraus. Falls du Änderungen oder Patches erstellen möchtest, wirst du für jede Änderung oder jeden Patch eine unveränderte Version des Quellcodes klonen müssen. Daher solltest du alle Arbeiten in einem eigenen Verzeichnis speichern. Falls du nur gelegentlich kompilierst und keine Änderungen vornehmen möchtest, reicht ein Verzeichnis aus. Für dieses Dokument wird angenommen, dass du einen Ordner `c:\firestorm` erstellt hast.
 
 ```
 c:
@@ -134,19 +127,19 @@ cd \firestorm
 git clone https://github.com/FirestormViewer/phoenix-firestorm.git
 ```
 
-## Prepare third party libraries
+## Drittanbieter-Bibliotheken vorbereiten
 
-Most third party libraries needed to build the viewer will be automatically downloaded for you and installed into the build directory within your source tree during compilation. Some need to be manually prepared and are not normally required when using an open source configuration (ReleaseFS_open).
-
-> [!IMPORTANT]
-> If you are manually building the third party libraries, you will have to build the correct version (32bit libraries for a 32bit viewer, 64bit versions for a 64bit viewer)!
-
-## FMOD Studio using Autobuild
-
-If you want to use FMOD Studio to play sounds within the viewer, you will have to download your own copy. FMOD Studio can be downloaded [here](https://www.fmod.com) (requires creating an account to access the download section).
+Die meisten Drittanbieter-Bibliotheken, die zum Bau des Viewers benötigt werden, werden automatisch heruntergeladen und während der Kompilierung in das Build-Verzeichnis deines Quellcode-Baums installiert. Einige müssen manuell vorbereitet werden und sind normalerweise nicht erforderlich, wenn eine Open-Source-Konfiguration (ReleaseFS_open) verwendet wird.
 
 > [!IMPORTANT]
-> Make sure to download the FMOD Studio API and not the FMOD Studio Tool!
+> Falls du die Drittanbieter-Bibliotheken manuell baust, musst du die korrekte Version erstellen (32-Bit-Bibliotheken für einen 32-Bit-Viewer, 64-Bit-Versionen für einen 64-Bit-Viewer)!
+
+## FMOD Studio mit Autobuild
+
+Falls du FMOD Studio verwenden möchtest, um Sounds im Viewer abzuspielen, musst du eine eigene Kopie herunterladen. FMOD Studio kann [hier](https://www.fmod.com) heruntergeladen werden (erfordert die Erstellung eines Kontos für den Download-Bereich).
+
+> [!IMPORTANT]
+> Stelle sicher, dass du die FMOD Studio API und nicht das FMOD Studio Tool herunterlädst!
 
 ```
 c:
@@ -154,15 +147,15 @@ cd \firestorm
 git clone https://github.com/FirestormViewer/3p-fmodstudio.git
 ```
 
-- After you have cloned the repository, copy the downloaded FMOD Studio installer file into the root of the repository
-- Make sure to modify the file build-cmd.sh in the root of the repository and set the correct version number based on the version you downloaded. Right at the top, you find the version number of FMOD Studio you want to package (one short version without separator and one long version):
+- Nachdem du das Repository geklont hast, kopiere die heruntergeladene FMOD Studio-Installer-Datei in das Stammverzeichnis des Repositorys.
+- Passe die Datei `build-cmd.sh` im Stammverzeichnis des Repositorys an und setze die korrekte Versionsnummer entsprechend der heruntergeladenen Version. Ganz oben findest du die FMOD Studio-Versionsnummer, die du packen möchtest (eine kurze Version ohne Trennzeichen und eine lange Version):
 
 ```
 FMOD_VERSION="20102"
 FMOD_VERSION_PRETTY="2.01.02"
 ```
 
-Continue on the Windows command line:
+Fahre in der Windows-Eingabeaufforderung fort:
 
 ```
 c:
@@ -171,15 +164,15 @@ autobuild build -A 64 --all
 autobuild package -A 64 --results-file result.txt
 ```
 
-While running the Autobuild build command, Windows might ask if you want to allow making changes to the computer. This is because of the FMOD Studio installer being executed. Allow these changes to be made.
+Während der Ausführung des Autobuild-Build-Befehls könnte Windows nachfragen, ob Änderungen am Computer vorgenommen werden dürfen. Dies liegt am FMOD Studio-Installer. Erlaube diese Änderungen.
 
-Near the end of the output you will see the package name written:
+Am Ende der Ausgabe siehst du den Paketnamen:
 
 ```
 wrote  C:\firestorm\3p-fmodstudio\fmodstudio-{version#}-windows64-{build_id}.tar.bz2''
 ```
 
-where {version#} is the version of FMOD Studio (like 2.01.02) and {build_id} is an internal build id of the package. Additionally, a file `result.txt` has been created containing the md5 hash value of the package file, which you will need in the next step.
+Hier ist `{version#}` die FMOD Studio-Version (z.B. 2.01.02) und `{build_id}` eine interne Build-ID des Pakets. Zusätzlich wird eine Datei `result.txt` erstellt, die den MD5-Hash-Wert der Paketdatei enthält, den du im nächsten Schritt benötigst.
 
 ```
 cd \firestorm\phoenix-firestorm
@@ -187,26 +180,26 @@ cp autobuild.xml my_autobuild.xml
 set AUTOBUILD_CONFIG_FILE=my_autobuild.xml
 ```
 
-Copy the FMOD Studio path and md5 value from the package process into this command:
+Kopiere den FMOD Studio-Pfad und MD5-Wert aus dem Paketierungsprozess in diesen Befehl:
 
-`autobuild installables edit fmodstudio platform=windows64 hash=<md5 value> url=file:///<fmodstudio path>`
+`autobuild installables edit fmodstudio platform=windows64 hash=<MD5-Wert> url=file:///<FMOD-Studio-Pfad>`
 
-For example:
+Beispiel:
 
 `autobuild installables edit fmodstudio platform=windows64 hash=a0d1821154e7ce5c418e3cdc2f26f3fc url=file:///C:/firestorm/3p-fmodstudio/fmodstudio-2.01.02-windows-192171947.tar.bz2`
 
 > [!NOTE]
-> Having to copy autobuild.xml and modify the copy from within a cloned repository is a lot of work for every repository you make, but this is the only way to guarantee you pick up upstream changes to autobuild.xml and do not send up a modified autobuild.xml when you do a git push.
+> Das Kopieren von `autobuild.xml` und das Anpassen der Kopie innerhalb eines geklonten Repositorys ist zwar aufwändig für jedes Repository, das du erstellst, aber dies ist die einzige Möglichkeit, sicherzustellen, dass du Änderungen an `autobuild.xml` aus dem Upstream-Repository übernimmst und keine modifizierte `autobuild.xml` bei einem `git push` hochlädst.
 
-## Configuring the viewer
+## Viewer konfigurieren
 
-Open the Windows command prompt.
+Öffne die Windows-Eingabeaufforderung.
 
-If you are building with FMOD Studio and have followed the previous FMOD Studio setup instructions AND you are now using a new terminal you will need to reset the environment variable first by entering 
+Falls du mit FMOD Studio baust und die vorherigen FMOD Studio-Einrichtungsanweisungen befolgt hast **UND** du jetzt ein neues Terminal verwendest, musst du zuerst die Umgebungsvariable zurücksetzen, indem du eingibst:
 
 `set AUTOBUILD_CONFIG_FILE=my_autobuild.xml`
 
-Then enter:
+Dann gib ein:
 
 ```
 c:
@@ -214,74 +207,74 @@ cd \firestorm\phoenix-firestorm
 autobuild configure -A 64 -c ReleaseFS_open
 ```
 
-This will configure Firestorm to be built with all defaults and without third party libraries.
+Dies konfiguriert Firestorm mit allen Standardeinstellungen und ohne Drittanbieter-Bibliotheken.
 
-Available premade firestorm-specific build targets:
+Verfügbare vordefinierte Firestorm-spezifische Build-Targets:
 
 ```
-ReleaseFS             (includes KDU, FMOD)
-ReleaseFS_open        (no KDU, no FMOD)
-RelWithDebInfoFS_open (no KDU, no FMOD)
+ReleaseFS             (enthält KDU, FMOD)
+ReleaseFS_open        (ohne KDU, ohne FMOD)
+RelWithDebInfoFS_open (ohne KDU, ohne FMOD)
 ```
 
 > [!TIP]
-> Configuring the viewer for the first time will take some time to download all the required third-party libraries. The download progress is hidden by default. If you want to watch the download progress, you can use the verbose option to display a more detailed output:
+> Die erste Konfiguration des Viewers dauert etwas, da alle benötigten Drittanbieter-Bibliotheken heruntergeladen werden müssen. Der Download-Fortschritt ist standardmäßig ausgeblendet. Falls du den Fortschritt sehen möchtest, kannst du die Option `-v` für eine detailliertere Ausgabe verwenden:  
 > `autobuild configure -A 64 -v -c ReleaseFS_open`
 
-### Configuration switches
+### Konfigurationsschalter
 
-There are a number of switches you can use to modify the configuration process. The name of each switch is followed by its type and then by the value you want to set.
+Es gibt mehrere Schalter, mit denen du den Konfigurationsprozess anpassen kannst. Der Name jedes Schalters wird gefolgt von seinem Typ und dem Wert, den du setzen möchtest.
 
-- -A \<architecture\> sets the target architecture, that is if you want to build a 32bit or 64bit viewer (32bit is default if omitted).
-- --fmodstudio controls if the FMOD Studio package is incorporated into the viewer. You must have performed the FMOD Studio installation steps in [FMOD Studio using Autobuild](#fmod-studio-using-autobuild) for this to work.
-- --package makes sure all files are copied into viewers output directory. You won't be able to start your compiled viewer if you don't enable package or do 'compile' it in VS.
-- --chan \<channel name\> lets you define a custom channel name for the viewer
-- -LL_TESTS:BOOL=\<bool\> controls if the tests are compiled and run. There are quite a lot of them so excluding them is recommended unless you have some reason to need one or more of them.
+- `-A <Architektur>` setzt die Zielarchitektur, also ob du einen 32-Bit- oder 64-Bit-Viewer bauen möchtest (falls weggelassen, ist 32-Bit der Standard).
+- `--fmodstudio` steuert, ob das FMOD Studio-Paket in den Viewer eingebunden wird. Du musst die FMOD Studio-Installationsschritte unter [FMOD Studio mit Autobuild](#fmod-studio-mit-autobuild) durchgeführt haben, damit dies funktioniert.
+- `--package` stellt sicher, dass alle Dateien in das Ausgabeverzeichnis des Viewers kopiert werden. Du wirst deinen kompilierten Viewer nicht starten können, wenn du `package` nicht aktivierst oder ihn nicht in VS "kompilierst".
+- `--chan <Kanalname>` ermöglicht dir, einen benutzerdefinierten Kanalnamen für den Viewer festzulegen.
+- `-LL_TESTS:BOOL=<bool>` steuert, ob Tests kompiliert und ausgeführt werden. Es gibt viele davon, daher wird empfohlen, sie auszuschließen, es sei denn, du hast einen bestimmten Grund, einen oder mehrere davon zu benötigen.
 
 > [!TIP]
-> **OFF** and **NO** are the same as **FALSE**; anything else is considered to be **TRUE**
+> **OFF** und **NO** sind dasselbe wie **FALSE**; alles andere wird als **TRUE** betrachtet.
 
-Examples:
+Beispiele:
 
-- To build a 64bit viewer with FMOD Studio and to create an installer package, run this command in the Windows command window:
-`autobuild configure -A 64 -c ReleaseFS_open -- --fmodstudio --package --chan MyViewer -DLL_TESTS:BOOL=FALSE`
+- Um einen 64-Bit-Viewer mit FMOD Studio und einem Installer-Paket zu bauen, führe diesen Befehl in der Windows-Eingabeaufforderung aus:  
+  `autobuild configure -A 64 -c ReleaseFS_open -- --fmodstudio --package --chan MyViewer -DLL_TESTS:BOOL=FALSE`
 
-- To build a 64bit viewer without FMOD Studio and without installer package, run this command:
-`autobuild configure -A 64 -c ReleaseFS_open -- --chan MyViewer -DLL_TESTS:BOOL=FALSE`
+- Um einen 64-Bit-Viewer ohne FMOD Studio und ohne Installer-Paket zu bauen, führe diesen Befehl aus:  
+  `autobuild configure -A 64 -c ReleaseFS_open -- --chan MyViewer -DLL_TESTS:BOOL=FALSE`
 
-## Building the viewer
+## Viewer bauen
 
-There are two ways to build the viewer: Via Windows command line or from within Visual Studio.
+Es gibt zwei Möglichkeiten, den Viewer zu bauen: Über die Windows-Eingabeaufforderung oder innerhalb von Visual Studio.
 
-### Building from the Windows command line
+### Bauen über die Windows-Eingabeaufforderung
 
-If you are building with FMOD Studio and have followed the previous FMOD Studio setup instructions AND you are now using a new terminal you will need to reset the environment variable with 
+Falls du mit FMOD Studio baust und die vorherigen FMOD Studio-Einrichtungsanweisungen befolgt hast **UND** du jetzt ein neues Terminal verwendest, musst du zuerst die Umgebungsvariable zurücksetzen mit:
 
 `set AUTOBUILD_CONFIG_FILE=my_autobuild.xml`
 
-Then run the Autobuild build command. Make sure you include the same architecture parameter you used while [configuring the viewer](#configuring-the-viewer):
+Dann führe den Autobuild-Build-Befehl aus. Stelle sicher, dass du denselben Architekturparameter verwendest, den du bei der [Viewer-Konfiguration](#viewer-konfigurieren) gewählt hast:
 
 `autobuild build -A 64 -c ReleaseFS_open --no-configure`
 
-Compiling will take quite a bit of time.
+Die Kompilierung wird einige Zeit in Anspruch nehmen.
 
-### Building from within Visual Studio
+### Bauen innerhalb von Visual Studio
 
-Inside the Firestorm source folder, you will find a folder named build-vc170-\<architecture\>, with \<architecture\> either being 32 or 64, depending on what you chose during the configuration step. Inside the folder is the Visual Studio solution file for Firestorm, called Firestorm.sln.
+Im Firestorm-Quellordner findest du einen Ordner namens `build-vc170-<Architektur>`, wobei `<Architektur>` entweder 32 oder 64 ist, je nachdem, was du während der Konfiguration gewählt hast. In diesem Ordner befindet sich die Visual Studio-Projektmappendatei für Firestorm, genannt `Firestorm.sln`.
 
-- Double-click Firestorm.sln to open the Firestorm solution in Visual Studio.
-- From the menu, choose Build -> Build Solution
-- Wait until the build is finished
+- Doppelklicke auf `Firestorm.sln`, um die Firestorm-Projektmappe in Visual Studio zu öffnen.
+- Wähle im Menü Build -> Build Solution
+- Warte, bis der Build abgeschlossen ist
 
-## Troubleshooting
+## Fehlerbehebung
 
 ### SystemRootsystem32: unbound variable
 
-When trying to execute the Autobuild build command, you might encounter an error similar to
+Beim Ausführen des Autobuild-Build-Befehls kann ein Fehler wie folgt auftreten:
 
 `../build.cmd.sh line 200: SystemRootsystem32: unbound variable`
 
-This error is caused by the order of the items in the Windows "path" environment variable. Autobuild exports all paths set in the "path" environment variable into Cygpath names and variables. Since these Windows "paths" can also contain variables like %SystemRoot% and they can also depend on each other, it is important to keep the dependency order intact. Example:
+Dieser Fehler wird durch die Reihenfolge der Einträge in der Windows-"path"-Umgebungsvariable verursacht. Autobuild exportiert alle Pfade, die in der "path"-Umgebungsvariable gesetzt sind, in Cygpath-Namen und -Variablen. Da diese Windows-"Pfade" auch Variablen wie `%SystemRoot%` enthalten können und voneinander abhängen können, ist es wichtig, die Abhängigkeitsreihenfolge beizubehalten. Beispiel:
 
 ```
 %SystemRoot%
@@ -289,4 +282,6 @@ This error is caused by the order of the items in the Windows "path" environment
 %SystemRoot%\System32\Wbem
 ```
 
-Make sure the ones mentioned are the first items set in the "path" environment variable.
+Stelle sicher, dass die genannten Einträge die ersten in der "path"-Umgebungsvariable sind.
+
+--- 
